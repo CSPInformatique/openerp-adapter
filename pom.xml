@@ -7,7 +7,7 @@
   
   <artifactId>openerp-adapter</artifactId>
   <groupId>com.cspinformatique</groupId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1</version>
   
   <url>http://maven.apache.org</url>
   

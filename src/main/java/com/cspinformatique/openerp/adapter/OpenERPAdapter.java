@@ -1,4 +1,4 @@
-package com.cspinformatique.blc.openerp.adapter;
+package com.cspinformatique.openerp.adapter;
 
 import org.apache.xmlrpc.XmlRpcException;
 
@@ -120,5 +120,25 @@ public class OpenERPAdapter {
 			this.sessionStarted = true;
 			this.openERPSession.startSession();
 		}
+	}
+	
+	public Row updateParameters(Row rowToUpdate, Map<String, Object> newParameters){
+		for(Entry<String, Object> entry : newParameters.entrySet()){
+			rowToUpdate.put(entry.getKey(), entry.getValue());
+		}
+		
+		return rowToUpdate;
+	}
+	
+	public boolean updateObject(Row rowToUpdate, String objectType){
+		this.startSession();
+
+		ObjectAdapter objectAdapter = this.openERPSession.getObjectAdapter(objectType);
+		
+		try {
+			return objectAdapter.writeObject(rowToUpdate, true);
+		} catch (XmlRpcException xmlRpcEx) {
+			throw new RuntimeException(xmlRpcEx);
+		}		
 	}
 }
